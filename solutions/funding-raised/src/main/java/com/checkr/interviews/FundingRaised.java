@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FundingRaised {
-
-    // find all rows matching the given options
     public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
         List<String[]> csvData = new ArrayList<String[]>();
         CSVReader reader = new CSVReader(new FileReader("startup_funding.csv"));
@@ -84,7 +82,6 @@ public class FundingRaised {
         return output;
     }
 
-    // Find a specific row matching the given options
     public static Map<String, String> findBy(Map<String, String> options) throws IOException, NoSuchEntryException {
         List<String[]> csvData = new ArrayList<String[]>();
         CSVReader reader = new CSVReader(new FileReader("startup_funding.csv"));
