@@ -1,4 +1,4 @@
-package src;
+package src.naming;
 
 import java.util.List;
 

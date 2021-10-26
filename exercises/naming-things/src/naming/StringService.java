@@ -1,4 +1,4 @@
-package src;
+package src.naming;
 
 public class StringService {
     public String formatA(String i, Boolean flag) {

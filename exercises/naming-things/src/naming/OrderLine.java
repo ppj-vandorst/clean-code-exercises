@@ -1,4 +1,4 @@
-package src;
+package src.naming;
 
 public class OrderLine {
     public String name;
