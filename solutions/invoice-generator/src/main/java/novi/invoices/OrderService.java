@@ -55,6 +55,7 @@ public class OrderService {
         if (product == null) {
             throw new RuntimeException(String.format("The product with id %d does not exist", input.productId));
         }
+        
         if (product.getStock() < input.count) {
             throw new RuntimeException(
                     String.format("The product with id %d does not have enough stock: requested: %d, stock: %d",

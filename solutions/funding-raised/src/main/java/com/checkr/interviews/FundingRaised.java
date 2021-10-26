@@ -6,43 +6,29 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FundingRaised {
-    static String[] fields = new String[] { "permalink", "company_name", "number_employees", "category", "city",
-            "state", "funded_date", "raised_amount", "raised_currency", "round" };
+    static String[] FILTERABLE_FIELDS = new String[] { "company_name", "city", "state", "round" };
 
     public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
-        List<String[]> csvData = new ArrayList<String[]>();
+        List<Map<String, String>> rows = extractCsvData("startup_funding.csv");
 
-        CSVReader reader = new CSVReader(new FileReader("startup_funding.csv"));
-        String[] row = null;
+        for (String field : FILTERABLE_FIELDS) {
+            List<Map<String, String>> filteredRows = new ArrayList<>();
 
-        while ((row = reader.readNext()) != null) {
-            csvData.add(row);
-        }
-
-        reader.close();
-        csvData.remove(0);
-
-        List<String[]> filteredRows = new ArrayList<>(csvData);
-
-        for (int fieldIndex = 0; fieldIndex < fields.length; fieldIndex++) {
-            List<String[]> newFilteredRows = new ArrayList<>();
-
-            if (options.containsKey(fields[fieldIndex])) {
-                for (String[] csvRow : filteredRows) {
-                    if (csvRow[fieldIndex].equals(options.get(fields[fieldIndex]))) {
-                        newFilteredRows.add(csvRow);
+            if (options.containsKey(field)) {
+                for (Map<String, String> row : rows) {
+                    if (rowMatchesOption(row, field, options.get(field))) {
+                        filteredRows.add(row);
                     }
                 }
-                filteredRows = newFilteredRows;
+                rows = filteredRows;
             }
         }
 
-        List<Map<String, String>> output = new ArrayList<Map<String, String>>();
-        for (String[] filteredRow : filteredRows) {
-            output.add(lineToMap(filteredRow));
-        }
+        return rows;
+    }
 
-        return output;
+    private static boolean rowMatchesOption(Map<String, String> row, String optionKey, String optionValue) {
+        return row.containsKey(optionKey) && row.get(optionKey).equals(optionValue);
     }
 
     public static Map<String, String> lineToMap(String[] line) {
@@ -58,6 +44,24 @@ public class FundingRaised {
         mappedLine.put("raised_currency", line[8]);
         mappedLine.put("round", line[9]);
         return mappedLine;
+    }
+
+    public static List<Map<String, String>> extractCsvData(String filePath) {
+        try {
+            CSVReader reader = new CSVReader(new FileReader(filePath));
+            List<Map<String, String>> rows = new ArrayList<>();
+
+            String[] row = null;
+            while ((row = reader.readNext()) != null) {
+                rows.add(lineToMap(row));
+            }
+
+            reader.close();
+            rows.remove(0);
+            return rows;
+        } catch (IOException e) {
+            throw new RuntimeException("Parsing of CSV failed", e);
+        }
     }
 
     public static Map<String, String> findBy(Map<String, String> options) throws IOException, NoSuchEntryException {
