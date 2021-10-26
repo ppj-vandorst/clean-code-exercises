@@ -6,8 +6,7 @@ import java.util.TimeZone;
 
 public class TextFormatter {
 
-    // Parses a date in ISO format
-    public String parseDate(Date date, boolean withTime, boolean twelveHours) {
+    public String parseDateInISOFormat(Date date, boolean withTime, boolean twelveHours) {
         SimpleDateFormat sdf;
         String format = "yyyy-MM-dd'T'";
         if (withTime) {

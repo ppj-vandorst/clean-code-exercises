@@ -2,7 +2,7 @@ package src;
 
 import java.util.List;
 
-import src.naming.ListCleaner;
+import src.naming.ListDeduplicator;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class Main {
         // new OrderLine("prod2", 10.99, 2), new OrderLine("prod1", 15.00, 10)));
         // System.out.println(invoice);
 
-        ListCleaner cleaner = new ListCleaner();
-        List<String> result = cleaner.clean(List.of("a", "b", "c", "d", "e", "b", "c", "f"));
+        ListDeduplicator cleaner = new ListDeduplicator();
+        List<String> result = cleaner.removeDuplicates(List.of("a", "b", "c", "d", "e", "b", "c", "f"));
         System.out.println(result);
     }
 }

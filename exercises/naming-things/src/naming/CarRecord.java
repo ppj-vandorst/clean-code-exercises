@@ -5,50 +5,50 @@ import java.time.format.DateTimeFormatter;
 
 public class CarRecord {
     private String licensePlateNumber;
-    private String manufacturingDate;
+    private String manufacturingISODate;
 
-    private String color;
-    private String rimColor;
+    private String colorHex;
+    private String rimColorHex;
 
-    private String owner;
-    private String ownerSince;
+    private String ownerFullName;
+    private String ownerSinceISODate;
 
-    public void update(String o) {
-        this.owner = o;
-        this.ownerSince = ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT);
+    public void assignNewOwner(String ownerFullName) {
+        this.ownerFullName = ownerFullName;
+        this.ownerSinceISODate = ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT);
     }
 
     // Getters / setters
-    public String getOwnerSince() {
-        return ownerSince;
+    public String getOwnerSinceISODate() {
+        return ownerSinceISODate;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getOwnerFullname() {
+        return ownerFullName;
     }
 
     public String getRimColor() {
-        return rimColor;
+        return rimColorHex;
     }
 
     public void setRimColor(String rimColor) {
-        this.rimColor = rimColor;
+        this.rimColorHex = rimColor;
     }
 
-    public String getColor() {
-        return color;
-    }
+    // public String getColor() {
+    //     return color;
+    // }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+    // public void setColor(String color) {
+    //     this.color = color;
+    // }
 
     public String getManufacturingDate() {
-        return manufacturingDate;
+        return manufacturingISODate;
     }
 
     public void setManufacturingDate(String manufacturingDate) {
-        this.manufacturingDate = manufacturingDate;
+        this.manufacturingISODate = manufacturingDate;
     }
 
     public String getLicensePlateNumber() {
