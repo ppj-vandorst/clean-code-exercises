@@ -10,10 +10,10 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductServiceImpl() {
         productsDatabase.put(1, new Product(1, "Product1", 10, 12.00));
-        productsDatabase.put(1, new Product(1, "Product2", 2, 10.00));
-        productsDatabase.put(1, new Product(1, "Product3", 0, 6.00));
-        productsDatabase.put(1, new Product(1, "Product4", 7, 8.00));
-        productsDatabase.put(1, new Product(1, "Product5", 1, 9.00));
+        productsDatabase.put(1, new Product(2, "Product2", 2, 10.00));
+        productsDatabase.put(1, new Product(3, "Product3", 0, 6.00));
+        productsDatabase.put(1, new Product(4, "Product4", 7, 8.00));
+        productsDatabase.put(1, new Product(5, "Product5", 1, 9.00));
     }
 
     @Override
